@@ -1,952 +1,593 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Art | En Luo</title>
+  <title>Art | Catherine Luo</title>
+  <meta name="description" content="Drawings and paintings by Catherine Luo in pastel, watercolor, charcoal, pencil, trois crayons, and oil.">
+  <link rel="canonical" href="https://encatherineluo.com/art.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- The same stylesheet and header classes used by index.html. -->
+  <link rel="stylesheet" href="style.css">
 
   <style>
     :root {
-      --blue: #7b949c;
-      --navy: #1c2851;
-      --cream: #f2e7d1;
-      --muted: #526a79;
+      --art-blue: #7b949c;
+      --art-navy: #182241;
+      --art-cream: #f6f2e9;
+      --art-ink: #302b24;
+      --art-muted: #7b7264;
+      --art-dark: #26221c;
+      --art-gold: #c49b43;
     }
 
-    * {
-      box-sizing: border-box;
+    .art-main {
+      background: var(--art-cream);
+      min-height: 100vh;
     }
 
-    html {
-      scroll-behavior: smooth;
+    /* A full-width blue rectangle, aligned with the homepage text. */
+    .art-intro {
+      padding: 60px 8% 72px;
+      background: var(--art-blue);
+      color: var(--art-navy);
     }
 
-    body {
+    .art-intro-inner { max-width: 900px; }
+
+    .art-intro h1 {
       margin: 0;
-      background: var(--blue);
-      color: var(--navy);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(48px, 5vw, 80px);
+      font-weight: 400;
+      line-height: 1.05;
     }
 
-    a {
-      color: inherit;
+    .art-intro p {
+      max-width: 760px;
+      margin: 28px 0 0;
+      font-size: 21px;
+      line-height: 1.45;
+    }
+
+    /* Continuous cream background: no inset panel or rounded corners. */
+    .art-gallery-section {
+      padding: 64px 0 96px;
+      background: var(--art-cream);
+    }
+
+    .art-gallery {
+      --art-gap: 42px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+      gap: var(--art-gap) 32px;
+      width: 84%;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .art-gallery.is-masonry {
+      grid-auto-rows: 1px;
+      row-gap: 0;
+    }
+
+    .art-card { min-width: 0; }
+
+    .art-link {
+      display: block;
+      color: var(--art-ink);
       text-decoration: none;
     }
 
-    button {
-      font: inherit;
-      cursor: pointer;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 28px;
-      padding: 34px clamp(24px, 4vw, 72px);
-      background: var(--blue);
-    }
-
-    .site-name {
-      color: #4d7087;
-      font-size: clamp(30px, 2.7vw, 46px);
-      font-weight: bold;
-      line-height: 1;
-    }
-
-    .site-nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: clamp(20px, 2.5vw, 46px);
-    }
-
-    .site-nav a {
-      font-size: clamp(17px, 1.35vw, 23px);
-      color: var(--navy);
-      transition: opacity 0.2s;
-    }
-
-    .site-nav a:hover,
-    .site-nav a[aria-current="page"] {
-      opacity: 0.65;
-    }
-
-    /* =========================
-       TITLE AND DESCRIPTION
-       BLUE BACKGROUND
-    ========================= */
-
-    .intro {
-      width: min(1714px, calc(100% - 72px));
-      margin: 0 auto;
-      padding: 70px 0 85px;
-    }
-
-    .intro h1 {
-      margin: 0;
-      font-size: clamp(58px, 5.8vw, 110px);
-      font-weight: bold;
-      letter-spacing: -0.045em;
-      line-height: 1.07;
-    }
-
-    .intro p {
-      margin: 45px 0 0;
-      max-width: 1640px;
-      font-size: clamp(19px, 1.55vw, 28px);
-      line-height: 1.44;
-    }
-
-    /* =========================
-       CREAM GALLERY PANEL
-    ========================= */
-
-    .gallery-panel {
-      width: min(1800px, calc(100% - 96px));
-      margin: 0 auto 72px;
-      padding: clamp(22px, 4vw, 58px);
-      background: var(--cream);
-      border-radius: 38px;
-    }
-
-    /* Masonry-style gallery */
-
-    .gallery {
-      columns: 3;
-      column-gap: 30px;
-    }
-
-    .artwork {
-      display: inline-block;
-      width: 100%;
-      vertical-align: top;
-      margin: 0 0 33px;
-      break-inside: avoid;
-      -webkit-column-break-inside: avoid;
-    }
-
-    .artwork-button {
+    .art-frame {
       display: block;
-      width: 100%;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: inherit;
-      text-align: left;
+      padding: clamp(10px, 1vw, 16px);
+      background: #fffdfa;
+      border: 1px solid #e1d9cb;
+      border-radius: 0;
+      box-shadow: 0 3px 5px rgb(49 40 25 / 6%),
+                  0 12px 22px rgb(49 40 25 / 9%);
+      transition: transform 180ms ease, box-shadow 180ms ease;
     }
 
-    .artwork-visual {
-      display: block;
-      width: 100%;
-      overflow: hidden;
-      background: #e8dcc4;
-      border-radius: 5px;
-    }
-
-    /* IMPORTANT:
-       All images keep their natural
-       aspect ratios and are not cropped.
-    */
-
-    .artwork-visual img {
+    .art-frame img {
       display: block;
       width: 100%;
       height: auto;
-      max-width: 100%;
-      aspect-ratio: auto;
-      object-fit: contain;
-      transition: transform 0.25s ease;
+      border-radius: 0;
     }
 
-    .artwork-button:hover .artwork-visual img {
-      transform: scale(1.02);
+    .art-caption {
+      display: block;
+      padding: 15px 4px 0;
     }
 
-    /* =========================
-       IMAGE PLACEHOLDER
-       (Only if an image is missing)
-    ========================= */
-
-    .placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      width: 100%;
-      min-height: 220px;
-      background: #e6d9bf;
-      color: #7e837d;
-      border: 1px solid rgba(28, 40, 81, 0.09);
+    .art-title {
+      display: block;
+      font-family: "Lora", Georgia, serif;
+      font-size: clamp(18px, 1.45vw, 23px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.35;
     }
 
-    .placeholder-number {
-      font-size: 36px;
-      color: #89918b;
-    }
-
-    .placeholder-label {
-      font: 11px Arial, sans-serif;
+    .art-details {
+      display: block;
+      margin-top: 5px;
+      color: var(--art-muted);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
       text-transform: uppercase;
-      letter-spacing: 0.13em;
     }
 
-    /* =========================
-       ARTWORK CAPTIONS
-    ========================= */
-
-    .caption {
-      display: block;
-      padding: 11px 2px 0;
+    .art-link:focus-visible {
+      outline: 2px solid var(--art-navy);
+      outline-offset: 7px;
     }
 
-    .caption-title {
-      display: block;
-      font-size: 19px;
-      line-height: 1.3;
-      color: var(--navy);
+    @media (hover: hover) {
+      .art-link:hover .art-frame {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 8px rgb(49 40 25 / 8%),
+                    0 16px 30px rgb(49 40 25 / 14%);
+      }
     }
 
-    .caption-details {
-      display: block;
-      margin-top: 3px;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-
-    /* =========================
-       FULL-SIZE IMAGE VIEWER
-    ========================= */
-
-    .lightbox {
-      width: min(1050px, calc(100vw - 32px));
-      max-height: 94vh;
-      border: 0;
-      border-radius: 12px;
-      padding: 0;
-      background: var(--cream);
-      color: var(--navy);
-    }
-
-    .lightbox::backdrop {
-      background: rgba(15, 25, 49, 0.82);
-    }
-
-    .lightbox-content {
+    .art-placeholder {
+      display: grid;
+      min-height: 220px;
       padding: 24px;
+      place-items: center;
+      background: #e9e1d2;
+      color: #675f52;
+      font-size: 15px;
+      text-align: center;
     }
 
-    .lightbox-top {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 12px;
-    }
+    .art-noscript { margin: 0 8%; }
 
-    .lightbox-close {
-      background: transparent;
+    /* Full-screen artwork viewer. */
+    html.art-viewer-open,
+    html.art-viewer-open body { overflow: hidden; }
+
+    .art-lightbox {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      height: 100dvh;
+      max-height: none;
+      margin: 0;
+      padding: 0;
       border: 0;
-      font-size: 30px;
-      line-height: 1;
-      color: var(--navy);
+      border-radius: 0;
+      background: var(--art-dark);
+      color: #f6f1e7;
+      overflow: auto;
+      overscroll-behavior: contain;
     }
 
-    .lightbox-image {
+    .art-lightbox::backdrop { background: var(--art-dark); }
+
+    .art-viewer-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(230px, 23%);
+      align-items: center;
+      gap: clamp(32px, 6vw, 100px);
+      min-height: 100%;
+      padding: 60px clamp(28px, 5vw, 96px);
+    }
+
+    .art-viewer-stage {
       display: flex;
       align-items: center;
       justify-content: center;
-      max-height: 68vh;
-      overflow: auto;
+      min-width: 0;
+      touch-action: pan-y pinch-zoom;
     }
 
-    .lightbox-image img {
+    .art-viewer-frame {
+      display: block;
+      min-width: 0;
+      max-width: 100%;
+      padding: 20px;
+      background: #fffdfa;
+      box-shadow: 0 24px 64px rgb(0 0 0 / 35%);
+    }
+
+    .art-viewer-frame img {
       display: block;
       width: auto;
       height: auto;
       max-width: 100%;
-      max-height: 68vh;
+      max-height: calc(100vh - 160px);
+      max-height: calc(100dvh - 160px);
       object-fit: contain;
     }
 
-    .lightbox-image .placeholder {
-      width: min(100%, 540px);
-      min-height: 260px;
+    .art-viewer-frame .art-placeholder { width: min(60vw, 500px); }
+
+    .art-viewer-info {
+      min-width: 0;
+      border-left: 1px solid #514a40;
+      padding: 3px 0 3px 28px;
     }
 
-    .lightbox-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      padding-top: 17px;
+    .art-viewer-count {
+      margin: 0 0 22px;
+      color: var(--art-gold);
+      font: 13px/1.5 Arial, sans-serif;
+      letter-spacing: 0.18em;
     }
 
-    .lightbox-title {
+    .art-viewer-title {
+      margin: 0 0 12px;
+      color: #f6f1e7;
+      font-family: "Lora", Georgia, serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.2;
+      overflow-wrap: break-word;
+    }
+
+    .art-viewer-details {
       margin: 0;
-      font-size: 23px;
+      color: #bfb4a2;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      text-transform: uppercase;
     }
 
-    .lightbox-details {
-      margin: 3px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .lightbox-description {
-      margin: 8px 0 0;
-      font-size: 15px;
-    }
-
-    .lightbox-description:empty {
-      display: none;
-    }
-
-    .lightbox-controls {
+    .art-viewer-controls {
       display: flex;
-      align-items: center;
-      gap: 13px;
+      gap: 12px;
+      margin-top: 30px;
     }
 
-    .lightbox-controls button {
-      border: 1px solid #b6b2a6;
-      background: transparent;
+    .art-viewer-button {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      place-items: center;
+      border: 1px solid #7e7465;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 21px;
+      background: transparent;
+      color: #eee7d9;
+      font: inherit;
+      cursor: pointer;
+      transition: background 150ms ease, border-color 150ms ease;
     }
 
-    .lightbox-controls button:hover {
-      background: rgba(255,255,255,0.6);
+    .art-viewer-button:hover {
+      border-color: #eee7d9;
+      background: rgb(255 255 255 / 7%);
     }
 
-    .lightbox-count {
-      white-space: nowrap;
-      font: 12px Arial, sans-serif;
+    .art-viewer-button:focus-visible {
+      outline: 2px solid var(--art-gold);
+      outline-offset: 5px;
     }
 
-    /* =========================
-       TABLET
-    ========================= */
+    .art-viewer-button svg {
+      width: 26px;
+      height: 26px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .art-viewer-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      background: var(--art-dark);
+    }
 
     @media (max-width: 900px) {
-      .gallery {
-        columns: 2;
-      }
+      .art-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    @media (max-width: 850px) {
+      .art-intro { padding: 55px 7% 52px; }
+      .art-intro h1 { font-size: clamp(42px, 7vw, 58px); }
+      .art-intro p { font-size: 18px; }
+      .art-gallery { width: 86%; column-gap: 24px; }
+      .art-gallery-section { padding: 44px 0 64px; }
+    }
 
-    @media (max-width: 620px) {
-
-      .site-header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 25px 22px;
+    @media (max-width: 760px) {
+      .art-viewer-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+        min-height: 100%;
+        padding: 82px 24px 36px;
+        align-content: center;
       }
 
-      .site-nav {
-        gap: 15px 24px;
+      .art-viewer-frame { padding: 14px; }
+      .art-viewer-frame img { max-height: 60vh; max-height: 60dvh; }
+
+      .art-viewer-info {
+        border-left: 0;
+        border-top: 1px solid #514a40;
+        padding: 24px 0 0;
       }
 
-      .intro {
-        width: calc(100% - 44px);
-        padding: 43px 0 52px;
-      }
+      .art-viewer-count { margin-bottom: 14px; }
+      .art-viewer-title { font-size: 30px; }
+      .art-viewer-controls { margin-top: 22px; }
+      .art-viewer-close { top: 16px; right: 16px; }
+    }
 
-      .intro h1 {
-        font-size: clamp(43px, 11vw, 68px);
-      }
-
-      .intro p {
-        margin-top: 22px;
-        font-size: 18px;
-      }
-
-      .gallery-panel {
-        width: calc(100% - 28px);
-        padding: 24px 18px;
-        border-radius: 25px;
-        margin-bottom: 35px;
-      }
-
-      .gallery {
-        columns: 1;
-      }
-
-      .lightbox-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .lightbox-content {
-        padding: 15px;
-      }
-
-      .lightbox-image img {
-        max-height: 60vh;
-      }
+    @media (max-width: 540px) {
+      .art-gallery { grid-template-columns: minmax(0, 1fr); }
+      .art-title { font-size: 21px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .artwork-visual img {
-        transition: none;
-      }
+      html { scroll-behavior: auto; }
+      .art-frame, .art-viewer-button { transition: none; }
     }
-
   </style>
 </head>
 
 <body>
-
-  <!-- =========================
-       HEADER
-  ========================= -->
-
   <header class="site-header">
-
-    <a class="site-name" href="index.html">
-      En Luo
-    </a>
-
-    <nav class="site-nav" aria-label="Main navigation">
-
+    <a class="site-logo" href="index.html">En Luo</a>
+    <nav class="nav-links" aria-label="Main navigation">
       <a href="index.html">Home</a>
-
       <a href="research.html">Research</a>
-
       <a href="art.html" aria-current="page">Art</a>
-
       <a href="music.html">Music</a>
-
     </nav>
-
   </header>
 
-  <!-- =========================
-       MAIN PAGE
-  ========================= -->
-
-  <main>
-
-    <!-- Title and introduction on blue background -->
-
-    <section class="intro">
-
-      <h1>Some of My Art</h1>
-
-      <p>
-        A variety of mediums including chalk pastel, watercolors,
-        charcoal, pencil, trois crayons, and oil.
-        Some are studies and master copies, while others are
-        completed in art studio or independently.
-      </p>
-
+  <main class="art-main">
+    <section class="art-intro" aria-labelledby="art-heading">
+      <div class="art-intro-inner">
+        <h1 id="art-heading">Some of My Works</h1>
+        <p>
+          A variety of mediums including chalk pastel, watercolors, charcoal,
+          pencil, trois crayons and oil. Some are studies and mastercopies
+          while others are completed in art studio or independently.
+        </p>
+      </div>
     </section>
 
-    <!-- Only the artworks are inside the cream panel -->
-
-    <section
-      class="gallery-panel"
-      aria-label="Art gallery"
-    >
-
-      <div class="gallery" id="gallery"></div>
-
+    <section class="art-gallery-section" aria-label="Art gallery">
+      <div class="art-gallery" id="art-gallery"></div>
+      <noscript><p class="art-noscript">Please enable JavaScript to view the gallery.</p></noscript>
     </section>
-
   </main>
 
-  <!-- =========================
-       ARTWORK VIEWER
-  ========================= -->
+  <dialog class="art-lightbox" id="art-lightbox"
+          aria-labelledby="art-viewer-title" aria-describedby="art-viewer-details">
+    <button class="art-viewer-button art-viewer-close" id="art-close"
+            type="button" aria-label="Close artwork viewer" autofocus>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m6 6 12 12M18 6 6 18"/>
+      </svg>
+    </button>
 
-  <dialog
-    class="lightbox"
-    id="lightbox"
-    aria-labelledby="lightbox-title"
-  >
+    <div class="art-viewer-layout">
+      <div class="art-viewer-stage" id="art-viewer-stage"></div>
 
-    <div class="lightbox-content">
-
-      <div class="lightbox-top">
-
-        <button
-          class="lightbox-close"
-          id="close"
-          aria-label="Close artwork"
-        >
-          &times;
-        </button>
-
-      </div>
-
-      <div
-        class="lightbox-image"
-        id="lightbox-image"
-      ></div>
-
-      <div class="lightbox-bottom">
-
-        <div>
-
-          <h2
-            class="lightbox-title"
-            id="lightbox-title"
-          ></h2>
-
-          <p
-            class="lightbox-details"
-            id="lightbox-details"
-          ></p>
-
-          <p
-            class="lightbox-description"
-            id="lightbox-description"
-          ></p>
-
+      <div class="art-viewer-info">
+        <div aria-live="polite" aria-atomic="true">
+          <p class="art-viewer-count" id="art-viewer-count"></p>
+          <h2 class="art-viewer-title" id="art-viewer-title"></h2>
+          <p class="art-viewer-details" id="art-viewer-details"></p>
         </div>
 
-        <div class="lightbox-controls">
-
-          <button
-            id="previous"
-            aria-label="Previous artwork"
-          >
-            &larr;
+        <div class="art-viewer-controls" aria-label="Artwork navigation">
+          <button class="art-viewer-button" id="art-previous"
+                  type="button" aria-label="Previous artwork">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12H3m5-5-5 5 5 5"/>
+            </svg>
           </button>
-
-          <span
-            class="lightbox-count"
-            id="lightbox-count"
-          ></span>
-
-          <button
-            id="next"
-            aria-label="Next artwork"
-          >
-            &rarr;
+          <button class="art-viewer-button" id="art-next"
+                  type="button" aria-label="Next artwork">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 12h18m-5-5 5 5-5 5"/>
+            </svg>
           </button>
-
         </div>
-
       </div>
-
     </div>
-
   </dialog>
 
   <script>
-
-    /* =====================================
-       YOUR 11 ARTWORKS
-
-       The images are located in:
-       files/art/
-
-       The order matches your requested list.
-
-       No fixed ratios:
-       Each image displays in its
-       original proportions.
-
-       You can edit the title, medium,
-       year, and description below.
-    ===================================== */
-
+    // Filenames match your existing files/art folder.
     const artworks = [
-
-      /* 1. STILL LIFE */
-
-      {
-        title: "Still Life #1",
-        medium: "Pastel",
-        year: "2026",
-        image: "files/art/" +
-          encodeURIComponent("Still Life #1.jpg"),
-        description: ""
-      },
-
-      /* 2. SELF-PORTRAIT */
-
-      {
-        title: "Self-portrait",
-        medium: "Trois crayons",
-        year: "2025",
-        image: "files/art/" +
-          encodeURIComponent("Self-portrait.jpg"),
-        description: ""
-      },
-
-      /* 3. GUANAJUATO */
-
-      {
-        title: "Guanajuato #1",
-        medium: "Pastel",
-        year: "2026",
-        image: "files/art/" +
-          encodeURIComponent("Guanajuato #1.jpg"),
-        description: ""
-      },
-
-      /* 4. FRITS THAULOW */
-
-      {
-        title: "Mastercopy of Frits Thaulow",
-        medium: "Pastel",
-        year: "2025",
-        image: "files/art/" +
-          encodeURIComponent("Mastercopy Frits Thaulow.jpg"),
-        description: ""
-      },
-
-      /* 5. THE BUTTERFLY DREAM */
-
-      {
-        title: "The Butterfly Dream",
-        medium: "Charcoal + Pastel",
-        year: "2025",
-        image: "files/art/" +
-          encodeURIComponent("The Butterfly Dream.jpg"),
-        description: ""
-      },
-
-      /* 6. CHIEN CHUNG-WEI */
-
-      {
-        title: "Mastercopy of Chien Chung-Wei",
-        medium: "Watercolor",
-        year: "2026",
-        image: "files/art/" +
-          encodeURIComponent(
-            "Mastercopy Chien Chung-Wei, Old Town.jpg"
-          ),
-        description: ""
-      },
-
-      /* 7. JACOB ZBUKVIC */
-
-      {
-        title: "Mastercopy of Jacob Zbukvic",
-        medium: "Watercolor",
-        year: "2026",
-        image: "files/art/" +
-          encodeURIComponent("Mastercopy Jacob Zbukvic.jpg"),
-        description: ""
-      },
-
-      /* 8. GAZE */
-
-      {
-        title: "Gaze",
-        medium: "Pencil",
-        year: "2024",
-        image: "files/art/" +
-          encodeURIComponent("Gaze.jpg"),
-        description: ""
-      },
-
-      /* 9. PIG */
-
-      {
-        title: "Pig",
-        medium: "Oil",
-        year: "2023",
-        image: "files/art/" +
-          encodeURIComponent("Pig.jpg"),
-        description: ""
-      },
-
-      /* 10. SUNFLOWERS */
-
-      {
-        title: "Sunflowers",
-        medium: "Oil",
-        year: "2022",
-        image: "files/art/" +
-          encodeURIComponent("Sunflowers.jpg"),
-        description: ""
-      },
-
-      /* 11. BLOOM */
-
-      {
-        title: "Bloom",
-        medium: "Oil",
-        year: "2022",
-        image: "files/art/" +
-          encodeURIComponent("Bloom.jpg"),
-        description: ""
-      }
-
+      { title: "Still Life #1", medium: "Pastel", year: "2026",
+        file: "Still Life #1.jpg", width: 3600, height: 5090 },
+      { title: "Self-portrait", medium: "Trois crayons", year: "2025",
+        file: "Self-portrait.jpg", width: 2610, height: 3925 },
+      { title: "Guanajuato #1", medium: "Pastel", year: "2026",
+        file: "Guanajuato #1.jpg", width: 3441, height: 5006 },
+      { title: "Mastercopy of Frits Thaulow", medium: "Pastel", year: "2025",
+        file: "Mastercopy Frits Thaulow.jpg", width: 3366, height: 2700 },
+      { title: "The Butterfly Dream", medium: "Charcoal + Pastel", year: "2025",
+        file: "The Butterfly Dream.jpg", width: 2640, height: 3915 },
+      { title: "Mastercopy of Chien Chung-Wei", medium: "Watercolor", year: "2026",
+        file: "Mastercopy Chien Chung-Wei, Old Town.jpg", width: 1280, height: 1755 },
+      { title: "Mastercopy of Jacob Zbukvic", medium: "Watercolor", year: "2026",
+        file: "Mastercopy Jacob Zbukvic.jpg", width: 1756, height: 1280 },
+      { title: "Gaze", medium: "Pencil", year: "2024",
+        file: "Gaze.jpg", width: 4284, height: 5712 },
+      { title: "Pig", medium: "Oil", year: "2023",
+        file: "Pig.jpg", width: 2789, height: 2830 },
+      { title: "Sunflowers", medium: "Oil", year: "2022",
+        file: "Sunflowers.jpg", width: 2632, height: 3507 },
+      { title: "Bloom", medium: "Oil", year: "2022",
+        file: "Bloom.jpg", width: 2505, height: 3825 }
     ];
 
-    /* =====================================
-       GALLERY JAVASCRIPT
-
-       No changes needed below.
-    ===================================== */
-
-    const gallery =
-      document.getElementById("gallery");
-
-    const dialog =
-      document.getElementById("lightbox");
-
-    const lightboxImage =
-      document.getElementById("lightbox-image");
-
+    const gallery = document.getElementById("art-gallery");
+    const dialog = document.getElementById("art-lightbox");
+    const stage = document.getElementById("art-viewer-stage");
+    const closeButton = document.getElementById("art-close");
     let currentIndex = 0;
+    let opener = null;
 
-    /* Create a placeholder if
-       an image cannot be loaded */
+    const imagePath = work => "files/art/" + encodeURIComponent(work.file);
+    const detailsText = work => `${work.medium} · ${work.year}`;
 
-    function makePlaceholder(index) {
-
-      const placeholder =
-        document.createElement("div");
-
-      placeholder.className = "placeholder";
-
-      const number =
-        document.createElement("span");
-
-      number.className = "placeholder-number";
-
-      number.textContent =
-        String(index + 1).padStart(2, "0");
-
-      const label =
-        document.createElement("span");
-
-      label.className = "placeholder-label";
-      label.textContent = "Artwork unavailable";
-
-      placeholder.append(number, label);
-
-      return placeholder;
-    }
-
-    /* Create an actual image */
-
-    function makeVisual(work, index, enlarged = false) {
-
-      if (!work.image) {
-        return makePlaceholder(index);
-      }
-
-      const image =
-        document.createElement("img");
-
-      image.src = work.image;
+    function makeImage(work, enlarged = false, index = 0) {
+      const image = document.createElement("img");
       image.alt = work.title;
-
-      image.loading = enlarged ? "eager" : "lazy";
-
+      image.width = work.width;
+      image.height = work.height;
+      image.loading = enlarged || index < 3 ? "eager" : "lazy";
       image.decoding = "async";
 
       image.addEventListener("error", () => {
-        image.replaceWith(makePlaceholder(index));
+        const placeholder = document.createElement("span");
+        placeholder.className = "art-placeholder";
+        placeholder.textContent = `${work.title} — image unavailable`;
+        image.replaceWith(placeholder);
       }, { once: true });
 
+      image.src = imagePath(work);
       return image;
     }
 
-    /* =====================================
-       RENDER ALL ARTWORKS
-    ===================================== */
-
-    function renderGallery() {
-
-      gallery.replaceChildren();
-
-      artworks.forEach((work, index) => {
-
-        const card =
-          document.createElement("article");
-
-        card.className = "artwork";
-
-        const button =
-          document.createElement("button");
-
-        button.className = "artwork-button";
-        button.type = "button";
-
-        button.setAttribute(
-          "aria-label",
-          `View ${work.title}`
-        );
-
-        /* Artwork image */
-
-        const visual =
-          document.createElement("span");
-
-        visual.className = "artwork-visual";
-
-        visual.append(
-          makeVisual(work, index)
-        );
-
-        /* Artwork caption */
-
-        const caption =
-          document.createElement("span");
-
-        caption.className = "caption";
-
-        const title =
-          document.createElement("span");
-
-        title.className = "caption-title";
-        title.textContent = work.title;
-
-        const details =
-          document.createElement("span");
-
-        details.className = "caption-details";
-
-        details.textContent =
-          `${work.medium} · ${work.year}`;
-
-        caption.append(title, details);
-
-        button.append(visual, caption);
-
-        button.addEventListener("click", () => {
-          openArtwork(index);
-        });
-
-        card.append(button);
-
-        gallery.append(card);
-
-      });
-
+    // Keep DOM/keyboard order while fitting differently shaped artworks.
+    function layoutGallery() {
+      const gap = parseFloat(getComputedStyle(gallery).getPropertyValue("--art-gap"));
+      gallery.classList.add("is-masonry");
+      for (const card of gallery.children) {
+        const height = card.firstElementChild.getBoundingClientRect().height;
+        card.style.gridRowEnd = `span ${Math.ceil(height + gap)}`;
+      }
     }
 
-    /* =====================================
-       ENLARGED IMAGE VIEWER
-    ===================================== */
+    let layoutFrame = 0;
+    function scheduleLayout() {
+      if (layoutFrame) return;
+      layoutFrame = requestAnimationFrame(() => {
+        layoutFrame = 0;
+        layoutGallery();
+      });
+    }
+
+    const resizeObserver = "ResizeObserver" in window
+      ? new ResizeObserver(scheduleLayout) : null;
+
+    artworks.forEach((work, index) => {
+      const card = document.createElement("article");
+      card.className = "art-card";
+
+      const link = document.createElement("a");
+      link.className = "art-link";
+      link.href = imagePath(work);
+      link.setAttribute("aria-label", `View ${work.title}, ${detailsText(work)}`);
+      link.setAttribute("aria-haspopup", "dialog");
+      link.setAttribute("aria-controls", "art-lightbox");
+
+      const frame = document.createElement("span");
+      frame.className = "art-frame";
+      const image = makeImage(work, false, index);
+      image.addEventListener("load", scheduleLayout);
+      image.addEventListener("error", scheduleLayout);
+      frame.append(image);
+
+      const caption = document.createElement("span");
+      caption.className = "art-caption";
+      const title = document.createElement("span");
+      title.className = "art-title";
+      title.textContent = work.title;
+      const details = document.createElement("span");
+      details.className = "art-details";
+      details.textContent = detailsText(work);
+      caption.append(title, details);
+      link.append(frame, caption);
+      card.append(link);
+      gallery.append(card);
+      resizeObserver?.observe(link);
+
+      link.addEventListener("click", event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        if (typeof dialog.showModal !== "function") return;
+        event.preventDefault();
+        opener = link;
+        showArtwork(index);
+        dialog.showModal();
+        document.documentElement.classList.add("art-viewer-open");
+        dialog.scrollTop = 0;
+        closeButton.focus({ preventScroll: true });
+      });
+    });
 
     function showArtwork(index) {
-
-      currentIndex =
-        (index + artworks.length) % artworks.length;
-
+      currentIndex = (index + artworks.length) % artworks.length;
       const work = artworks[currentIndex];
-
-      /* Show full-sized image */
-
-      lightboxImage.replaceChildren(
-        makeVisual(work, currentIndex, true)
-      );
-
-      /* Title */
-
-      document.getElementById(
-        "lightbox-title"
-      ).textContent = work.title;
-
-      /* Medium and year */
-
-      document.getElementById(
-        "lightbox-details"
-      ).textContent =
-        `${work.medium} · ${work.year}`;
-
-      /* Optional description */
-
-      document.getElementById(
-        "lightbox-description"
-      ).textContent = work.description || "";
-
-      /* Position */
-
-      document.getElementById(
-        "lightbox-count"
-      ).textContent =
+      const frame = document.createElement("div");
+      frame.className = "art-viewer-frame";
+      frame.append(makeImage(work, true));
+      stage.replaceChildren(frame);
+      document.getElementById("art-viewer-title").textContent = work.title;
+      document.getElementById("art-viewer-details").textContent = detailsText(work);
+      document.getElementById("art-viewer-count").textContent =
         `${currentIndex + 1} / ${artworks.length}`;
-
+      dialog.scrollTop = 0;
     }
 
-    /* Open artwork */
-
-    function openArtwork(index) {
-
-      showArtwork(index);
-
-      dialog.showModal();
-
-    }
-
-    /* Close viewer */
-
-    document.getElementById("close")
-      .addEventListener("click", () => {
-
-        dialog.close();
-
-      });
-
-    /* Previous artwork */
-
-    document.getElementById("previous")
-      .addEventListener("click", () => {
-
-        showArtwork(currentIndex - 1);
-
-      });
-
-    /* Next artwork */
-
-    document.getElementById("next")
-      .addEventListener("click", () => {
-
-        showArtwork(currentIndex + 1);
-
-      });
-
-    /* Keyboard arrow navigation */
-
-    document.addEventListener("keydown", (event) => {
-
-      if (!dialog.open) return;
-
-      if (event.key === "ArrowLeft") {
-        showArtwork(currentIndex - 1);
-      }
-
-      if (event.key === "ArrowRight") {
-        showArtwork(currentIndex + 1);
-      }
-
+    closeButton.addEventListener("click", () => dialog.close());
+    document.getElementById("art-previous").addEventListener("click", () => {
+      showArtwork(currentIndex - 1);
+    });
+    document.getElementById("art-next").addEventListener("click", () => {
+      showArtwork(currentIndex + 1);
     });
 
-    /* Close when clicking outside viewer */
-
-    dialog.addEventListener("click", (event) => {
-
-      if (event.target === dialog) {
-        dialog.close();
-      }
-
+    // Native dialog handles Escape and keeps focus inside the viewer.
+    dialog.addEventListener("close", () => {
+      document.documentElement.classList.remove("art-viewer-open");
+      opener?.focus({ preventScroll: true });
     });
 
-    /* Initialize gallery */
+    dialog.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        showArtwork(currentIndex + (event.key === "ArrowRight" ? 1 : -1));
+      }
+    });
 
-    renderGallery();
+    // Swipe left or right on the artwork on touchscreens.
+    let touchStart = null;
+    stage.addEventListener("touchstart", event => {
+      touchStart = event.touches.length === 1
+        ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+    }, { passive: true });
+    stage.addEventListener("touchend", event => {
+      if (!touchStart) return;
+      const dx = event.changedTouches[0].clientX - touchStart.x;
+      const dy = event.changedTouches[0].clientY - touchStart.y;
+      touchStart = null;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        showArtwork(currentIndex + (dx < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+    stage.addEventListener("touchcancel", () => { touchStart = null; });
 
+    window.addEventListener("resize", scheduleLayout);
+    if (document.fonts) document.fonts.ready.then(scheduleLayout);
+    scheduleLayout();
   </script>
-
 </body>
 </html>
