@@ -532,6 +532,37 @@
         min-height: 260px;
       }
     }
+
+  
+    /* Smaller main heading */
+    .hero-title {
+      font-size: clamp(48px, 7vw, 108px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+    
+    /* Simple introduction in the cream box */
+    .art-intro {
+      display: block;
+      margin-bottom: 30px;
+    }
+    
+    .art-description {
+      max-width: 1100px;
+      margin: 0;
+      font-size: clamp(20px, 2.2vw, 28px);
+      line-height: 1.55;
+      font-weight: normal;
+      color: var(--navy);
+    }
+    
+    /* Mobile heading */
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: clamp(42px, 9vw, 60px);
+      }
+    }
+
   </style>
 </head>
 <body>
